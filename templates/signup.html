@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div style="height: 100vh; display: flex;justify-content: center; align-items: center; flex-direction: column;  "
+        class="box">
+        <div style="display: flex; flex-direction: column;background-color: gold; height: 300px;" class="d-flex">
+            <form method="post">
+
+                {% csrf_token %}
+
+                {{ user.as_p }}
+
+                <h4 style="display: flex;flex-direction: column; text-align: center;" ><button  type="submit" class="btn btn-primary ">Sign up</button></h4>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

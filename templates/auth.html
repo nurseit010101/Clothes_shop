@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div style="height: 100vh; display: flex;justify-content: center; align-items: center; flex-direction: column; text-align: center; "
+        class="box">
+        <h3 style="width: 365px; border: 1px solid;" class="btn  btn-light" >Welcome Back</h3>
+        <h4><button style="width: 365px;  " class=" btn  btn-dark
+            "><a style="color: white;" href="">Log in with Google</a></button></h4>
+        <h4><button style="width: 365px; " class=" btn btn-primary
+            "><a  style="color: white;" href="">Log in with Facebook</a></button></h4>
+        <div class="btn btn-warning">
+            <form method="post">
+
+                {% csrf_token %}
+
+                {{ user.as_p }}
+
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </form>
+        </div>
+        <p>Don’t have an account? <a href="{% url 'signUp' %}">Sign up</a></p>
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

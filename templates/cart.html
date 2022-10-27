@@ -1,0 +1,87 @@
+{% extends 'index.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% load static %}
+{% block content %}
+<div class="container d-flex">
+    <div class="block m">
+        <div class="bag " style=" margin: 5px 0 5px 0; font-size:2rem ; ">
+            MY BAG
+        </div>
+        {% if not lst %}
+        <div class="card mb-3" style="max-width: 100%;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{% static 'images/feature-3.png' %}" class="card-img-top "
+                        style="background-size:cover; width:150px ; height: 200px;" alt="...">
+                </div>
+                <div class="col-md-8 d-flex">
+                    <div class="card-body">
+                        <a href="/" class="mb-5"> Price $</a>
+                        <h5 class="card-title  mb-3">
+                            $$$$$$
+                        </h5>
+                        <p class="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, quibusdam?</p>
+                        <div class="d-flex" style="justify-content:space-between">
+                            <a href="" class="btn btn-primary mb-3">
+                                <i class="fa-regular fa-heart"></i>
+                                Save for later
+                            </a>
+                            <span> Count: 0</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <a href=""><i class="fa-sharp fa-solid fa-xmark"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        {% for i in lst reversed %}
+        <div class="card mb-3" style="max-width: 100%;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{i.0.3}}" class="card-img-top "
+                        style="background-size:cover; width:150px ; height: 200px;" alt="...">
+                </div>
+                <div class="col-md-8 d-flex">
+                    <div class="card-body">
+                        <a href="/" class="mb-5"> {{i.0.4}} $</a>
+                        <h5 class="card-title  mb-3">
+                            {{i.0.1}}
+                        </h5>
+                        <p class="card-text mb-5">{{i.0.2}}</p>
+                        <div class="d-flex" style="justify-content:space-between">
+                            <a href="" class="btn btn-primary mb-3">
+                                <i class="fa-regular fa-heart"></i>
+                                Save for later
+                            </a>
+                            <span> Count: {{ i.1 }}</span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <a href="{% url 'removeCart' id=i.0.0 %}"><i class="fa-sharp fa-solid fa-xmark"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+    </div>
+    <div class="block m-5" style="margin-left: 10px;">
+        <div class="row" style=" align-items:center ;">
+            <h1>Check</h1>
+            <div class="count d-flex" style="justify-content:space-between">
+                <h5>Count product</h5>
+                <p>{{ count_of_product }}</p>
+            </div>
+            <a href="" class="btn btn-primary mb-3">
+                {{ all_products_sum }} $
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

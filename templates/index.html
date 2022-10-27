@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/012-Suit-512.webp' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/image.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+</head>
+
+
+<body class="body_main">
+    <nav class="navbar navbar-expand-lg navbar-light  bg-dark " style="position:sticky; top:0; z-index: 2; ">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}"><img style="background-color:gold; border-radius: 20%;"
+                    width="80px" height="40px" src="https://icon-library.com/images/coat-icon/coat-icon-16.jpg"
+                    alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" style="justify-content:space-around;" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-warning" aria-current="page" href="#">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="#">Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="#" tabindex="-1" aria-disabled="true">For Teams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="#" tabindex="-1" aria-disabled="true">How to order?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="#" tabindex="-1" aria-disabled="true"></a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav mb-2 ">
+                    <li class="nav-item d-flex ">
+                        <a class="nav-link text-warning  " aria-current="page" href="{% url 'cart' %}"><i
+                                class="fa-solid fa-cart-shopping "></i></a>
+
+                        <div class="btn-group " role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn dropdown-toggle text-warning"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-user   "></i>
+                            </button>
+                            <ul class="dropdown-menu " aria-labelledby="btnGroupDrop1">
+                                {% if user.is_authenticated %}
+                                <p>{{user}}</p>
+                                <a style="font-size: 15px; " href="{% url 'signout' %}" class=" btn">Logout</a>
+                                {% else %}
+                                <div style="display: flex ; flex-direction: column;  background-color: gold; " class="sign">
+                                    <a style="font-size: 15px; background-color: gold; color: black; "
+                                    href="{% url 'signin' %}" class="  btn-primary">Log in</a>
+                                <a style="font-size: 15px; background-color: gold; color: black;"
+                                    href="{% url 'signUp' %}" class="  btn-primary">Sign up</a>
+                                </div>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+    <div class="footer_content">
+        <div class="container">
+            <div class="main_wrap">
+                <div class="footer_content_wrap">
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <div class="column_head">
+                            <h4 style="color: gold;">Menu</h4>
+                        </div>
+                        <div class="column_link">
+                            <a href="{% url 'index' %}">
+                                <p style="color: gold;">Home</p>
+                            </a>
+                            <a href="{% url 'catalog'%}">
+                                <p style="color: gold;">Products</p>
+                            </a>
+                            <a href="{% url 'contackts' %}">
+                                <p style="color: gold;">Contacts</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="display: flex;flex-direction: column; text-align: center;" class="form-box">
+                        <h4 style="color: gold;">Contact us</h4>
+                        <form action="/message/" method="POST">
+                            {% csrf_token%}
+                            <table class="table table-responsive d-table">
+                                <tr>
+                                    <td><input type="text" name="name" class="form-control pl-0" placeholder="Name" />
+                                    </td>
+                                    <td><input type="email" name="email" class="form-control pl-0"
+                                            placeholder="E-mail" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="text" name="address" class="form-control pl-0"
+                                            placeholder="Address" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="text" name="message" class="form-control pl-0"
+                                            placeholder="Message" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center pl-0"><button type="submit"
+                                            class="btn btn-warning">Send</button></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <div class="column_head">
+                            <h4 style="color: gold;">Account</h4>
+                        </div>
+                        <div class="column_link">
+                            <a href="#">
+                                <p style="color: gold;">Your Account</p>
+                            </a>
+                            <a href="#">
+                                <p style="color: gold;">Personal information</p>
+                            </a>
+                            <a href="#">
+                                <p style="color: gold;">Address</p>
+                            </a>
+                            <a href="#">
+                                <p style="color: gold;">Discount</p>
+                            </a>
+                            <a href="#">
+                                <p style="color: gold;">Orders history</p>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="footer_copyrights">
+                <div class="main_wrap">
+                    <div class="footer_copyrights_text">
+                        © 2022 Internet shopping. Все права защищены - Designed by Mr.Nurseit
+                    </div>
+                    <div class="footer_copyrights_social">
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-google-plus-g"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-tumblr"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-rss"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
