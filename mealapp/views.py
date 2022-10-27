@@ -30,12 +30,6 @@ def index(request):
     return render(request, 'index1.html' ,{'zipped_lst':zipped_lst})
 def catalog(request):
     return render(request, 'catalog.html')
-def karkasson(request):
-    return render(request, 'karkasson.html')
-def machi_koro(request):
-    return render(request, 'machi_koro.html')
-def manchkin(request):
-    return render(request, 'manchkin.html')
 def contackts(request):
     return render(request, 'contackts.html')
 
