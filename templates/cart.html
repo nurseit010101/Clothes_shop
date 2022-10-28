@@ -1,87 +1,149 @@
 {% extends 'index.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% load static %}
+{% block title %}Main{% endblock %}
 {% block content %}
+{% load static %}
+
+<!-- <div style="display:flex;"  class="image">
+    <img width="600px" height="600px" src="https://media2.fenom.com/81369-product_large/xadidas-superstar-andre-saraiva.jpg.pagespeed.ic.5NWNGkvTa2.jpg" class="img-thumbnail" alt="...">
+    <h2 style="display:flex; text-align: center; margin-left: 100px; margin-top: 50px;">Adidas Superstar Andre Saraiva</h2>
+</div > -->
 <div class="container d-flex">
-    <div class="block m">
-        <div class="bag " style=" margin: 5px 0 5px 0; font-size:2rem ; ">
-            MY BAG
+  <div class="block m">
+    <div class="bag " style=" margin: 5px 0 5px 0; font-size:2rem ; ">
+      MY BAG
+    </div>
+    {% if not lst %}
+    <div class="card mb-3" style="max-width: 100%;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{% static 'images/feature-3.png' %}" class="card-img-top "
+            style="background-size:cover; width:150px ; height: 200px;" alt="...">
         </div>
-        {% if not lst %}
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{% static 'images/feature-3.png' %}" class="card-img-top "
-                        style="background-size:cover; width:150px ; height: 200px;" alt="...">
-                </div>
-                <div class="col-md-8 d-flex">
-                    <div class="card-body">
-                        <a href="/" class="mb-5"> Price $</a>
-                        <h5 class="card-title  mb-3">
-                            $$$$$$
-                        </h5>
-                        <p class="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, quibusdam?</p>
-                        <div class="d-flex" style="justify-content:space-between">
-                            <a href="" class="btn btn-primary mb-3">
-                                <i class="fa-regular fa-heart"></i>
-                                Save for later
-                            </a>
-                            <span> Count: 0</span>
-                        </div>
-                    </div>
-                    <div class="p-3">
-                        <a href=""><i class="fa-sharp fa-solid fa-xmark"></i></a>
-                    </div>
-                </div>
+        <div class="col-md-8 d-flex">
+          <div class="card-body">
+            <a href="/" class="mb-5"> Price $</a>
+            <h5 class="card-title  mb-3">
+              $$$$$$
+            </h5>
+            <p class="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, quibusdam?</p>
+            <div class="d-flex" style="justify-content:space-between">
+              <a href="" class="btn btn-primary mb-3">
+                <i class="fa-regular fa-heart"></i>
+                Save for later
+              </a>
+              <span> Count: 0</span>
             </div>
+          </div>
+          <div class="p-3">
+            <a href=""><i class="fa-sharp fa-solid fa-xmark"></i></a>
+          </div>
         </div>
-        {% else %}
-        {% for i in lst reversed %}
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{i.0.3}}" class="card-img-top "
-                        style="background-size:cover; width:150px ; height: 200px;" alt="...">
-                </div>
-                <div class="col-md-8 d-flex">
-                    <div class="card-body">
-                        <a href="/" class="mb-5"> {{i.0.4}} $</a>
-                        <h5 class="card-title  mb-3">
-                            {{i.0.1}}
-                        </h5>
-                        <p class="card-text mb-5">{{i.0.2}}</p>
-                        <div class="d-flex" style="justify-content:space-between">
-                            <a href="" class="btn btn-primary mb-3">
-                                <i class="fa-regular fa-heart"></i>
-                                Save for later
-                            </a>
-                            <span> Count: {{ i.1 }}</span>
-                        </div>
-                    </div>
-                    <div class="p-3">
-                        <a href="{% url 'removeCart' id=i.0.0 %}"><i class="fa-sharp fa-solid fa-xmark"></i></a>
-                    </div>
-                </div>
+      </div>
+    </div>
+    {% else %}
+    {% for i in lst reversed %}
+    <div class="card mb-3" style="max-width: 100%;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{i.0.3}}" class="card-img-top " style="background-size:cover; width:150px ; height: 200px;"
+            alt="...">
+        </div>
+        <div class="col-md-8 d-flex">
+          <div class="card-body">
+            <a href="/" class="mb-5"> {{i.0.4}} $</a>
+            <h5 class="card-title  mb-3">
+              {{i.0.1}}
+            </h5>
+            <p class="card-text mb-5">{{i.0.2}}</p>
+            <div class="d-flex" style="justify-content:space-between">
+              <a href="" class="btn btn-primary mb-3">
+                <i class="fa-regular fa-heart"></i>
+                Save for later
+              </a>
+              <span> Count: {{ i.1 }}</span>
             </div>
+          </div>
+          <div class="p-3">
+            <a href="{% url 'removeCart' id=i.0.0 %}"><i class="fa-sharp fa-solid fa-xmark"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+  </div>
+  <div class="block m-5" style="margin-left: 10px;">
+    <div class="row" style=" align-items:center ;">
+      <h1>Check</h1>
+      <div class="count d-flex" style="justify-content:space-between">
+        <h5>Count product</h5>
+        <p>{{ count_of_product }}</p>
+      </div>
+      <a href="" class="btn btn-primary mb-3">
+        {{ all_products_sum }} $
+      </a>
+      <div class="row mt-4 d-flex align-items-center">
+        <div class="col-sm-6 order-md-2 text-right">
+          <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Оформить заказ
+          </a>
+        </div>
+        {% if messages %}
+        {% for i in messages %}
+        <div class="alert alert-{{i.extra_tags}} d-flex align-items-center" role="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+            <use xlink:href="#check-circle-fill" />
+          </svg>
+          <div>
+            {{i}}
+          </div>
         </div>
         {% endfor %}
         {% endif %}
-
-    </div>
-    <div class="block m-5" style="margin-left: 10px;">
-        <div class="row" style=" align-items:center ;">
-            <h1>Check</h1>
-            <div class="count d-flex" style="justify-content:space-between">
-                <h5>Count product</h5>
-                <p>{{ count_of_product }}</p>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="POST" action="{% url 'order' %}">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Имя:</label>
+                    <input required type="text" class="form-control" id="recipient-name" name="c_name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Фамилия:</label>
+                    <input required type="text" class="form-control" id="recipient-name" name="c_lastname">
+                  </div>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Ваш номер:</label>
+                    <input required type="text" class="form-control" id="recipient-name" name="c_number">
+                  </div>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Адрес:</label>
+                    <input required type="text" class="form-control" id="recipient-name" name="c_addres">
+                  </div>
+                  <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Сообщение:</label>
+                    <textarea class="form-control" id="message-text" name="c_message"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <a href="" class="btn btn-primary mb-3">
-                {{ all_products_sum }} $
-            </a>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+
 
 {% endblock %}

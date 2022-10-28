@@ -17,6 +17,7 @@ class Clothes(models.Model):
     description = models.TextField(verbose_name = 'Description', max_length = 200)
     image = models.ImageField(null = True, verbose_name = 'Image')
     size = models.IntegerField( verbose_name = 'Size of clothes')
+    price = models.IntegerField( null = True, verbose_name = 'Price')
     color = models.CharField(max_length = 70,verbose_name = 'Color of clothes')
     brand_of_clothes = models.ForeignKey( Brand, on_delete = models.PROTECT, verbose_name = 'Brand of clothes')
     gender_of_clothes = models.ForeignKey( Gender_clothes, on_delete = models.PROTECT, verbose_name = 'Gender of clothes')
@@ -24,6 +25,14 @@ class Clothes(models.Model):
     sent_at = models.DateTimeField(auto_now_add=True, verbose_name='Date and Time')
     update_at = models.DateTimeField(auto_now=True, verbose_name='Update Time')
 
+class SneakerCard(models.Model):
+    tittle = models.CharField(max_length = 50, verbose_name = 'Название')
+    description = models.TextField(verbose_name = 'Описание')
+    price = models.IntegerField(verbose_name = 'Цена')
+    image = models.ImageField(upload_to = 'mainapp', verbose_name = 'Изображение' )
+
+    Category = models.ForeignKey(Brand,
+    verbose_name = 'Бренд', on_delete = models.CASCADE)
 
 class Contact(models.Model):
     name = models.CharField(max_length=40, verbose_name='name')
@@ -47,4 +56,4 @@ class Order(models.Model):
     total_price = models.IntegerField(verbose_name='Total price')
     phone = models.IntegerField(verbose_name='Phone number')
     address = models.CharField(max_length=500, null=True, verbose_name='Addres')
-    date = models.DateField(auto_now_add=True, verbose_name='Date')
+    sent_at = models.DateField(auto_now_add=True, verbose_name='Date')

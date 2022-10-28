@@ -1,6 +1,6 @@
 import requests
 
-FOOD_API=f'https://kubatbek.pythonanywhere.com/api/v1/Clothes'
+FOOD_API=f'https://Kubatbek.pythonanywhere.com/api/v1/Clothes'
 res=requests.get(FOOD_API)
 jeyson=res.json()
 run = len(jeyson)
